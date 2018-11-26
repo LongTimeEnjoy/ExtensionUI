@@ -91,11 +91,5 @@ public class EmojiBuildTool : Editor {
         }
         return rSpritesDic;
     }
-    public class EmojiInfo
-    {
-        public string mKey;
-        public int mFrame;
-        public float mUV_X;
-        public float mUV_Y;
-    }
+    
 }
