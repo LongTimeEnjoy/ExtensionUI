@@ -83,13 +83,14 @@ public class EmojiBuildTool : Editor {
             string rPath= AssetDatabase.GUIDToAssetPath(rGUID[i]);
             var rTex= AssetDatabase.LoadAssetAtPath<Texture2D>(rPath);
             string[]rNameSplit= rTex.name.Split('_');
-            if (rSpritesDic.ContainsKey(rNameSplit[0]))
-                rSpritesDic[rNameSplit[0]].Add(rTex);
+            string rKey= string.Format("[image={0}]",rNameSplit[0]);
+            if (rSpritesDic.ContainsKey(rKey))
+                rSpritesDic[rKey].Add(rTex);
             else
             {
                 List<Texture2D> rSprites = new List<Texture2D>();
                 rSprites.Add(rTex);
-                rSpritesDic.Add(rNameSplit[0], rSprites);
+                rSpritesDic.Add(rKey, rSprites);
             }
         }
         return rSpritesDic;

@@ -1,1 +1,1 @@
-{"smile":{"mKey":"smile","mFrame":1,"mUV_X":"0","mUV_Y":"0"}}:"0"}}
+{"[image=smile]":{"mKey":"[image=smile]","mFrame":1,"mUV_X":"0","mUV_Y":"0"}}

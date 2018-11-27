@@ -23,7 +23,7 @@ public class EmojiText : Text {
 			Dictionary<int,EmojiInfo>rFindEmojis=new Dictionary<int, EmojiInfo>();
 			int rLastIndex=0;
 			//利用正则表达式找到符合约定的占位符
-			MatchCollection rMatches=Regex.Matches(text,"\\[Image=[0-9]+\\]");
+			MatchCollection rMatches=Regex.Matches(text,"\\[image=[a-z0-9A-Z]+\\]");
 			StringBuilder rTempString=new StringBuilder();
 			for (int i = 0; i < rMatches.Count; i++)
 			{
@@ -45,7 +45,7 @@ public class EmojiText : Text {
 			//这里是直接复制的UGUI的Text生成定点的代码
 			Vector2 extent=rectTransform.rect.size;
 			var settings= GetGenerationSettings(extent);
-			cachedTextGenerator.Populate(text, settings);
+			cachedTextGenerator.Populate(rTempString.ToString(), settings);
 			Rect inputRect = rectTransform.rect;
         	// get the text alignment anchor point for the text in local space
         	Vector2 textAnchorPivot = GetTextAnchorPivot(alignment);
@@ -81,7 +81,7 @@ public class EmojiText : Text {
 				for (int i = 0; i < verts.Count; i++)
 				{
 					EmojiInfo rInfo;
-					if (rFindEmojis.TryGetValue(i,out rInfo))
+					if (rFindEmojis.TryGetValue(i/4,out rInfo))
 					{
 						float charDis = (verts[i + 1].position.x - verts[i].position.x);
         				m_TempVerts[3] = verts[i];//1
@@ -103,9 +103,9 @@ public class EmojiText : Text {
 
         				//计算Emoji的UV，利用uv0传递帧数，uv1是emoji的纹理坐标
         				m_TempVerts[0].uv1 = new Vector2(float.Parse(rInfo.mUV_X), float.Parse(rInfo.mUV_Y));
-        				m_TempVerts[1].uv1 = new Vector2(float.Parse(rInfo.mUV_X + 32), float.Parse(rInfo.mUV_Y));
-        				m_TempVerts[2].uv1 = new Vector2(float.Parse(rInfo.mUV_X + 32), float.Parse(rInfo.mUV_Y+ 32));
-        				m_TempVerts[3].uv1 = new Vector2(float.Parse((rInfo.mUV_X)), float.Parse(rInfo.mUV_Y + 32));
+        				m_TempVerts[1].uv1 = new Vector2(float.Parse(rInfo.mUV_X + (32f/1024f)), float.Parse(rInfo.mUV_Y));
+        				m_TempVerts[2].uv1 = new Vector2(float.Parse(rInfo.mUV_X + (32f/1024f)), float.Parse(rInfo.mUV_Y+ (32f/1024f)));
+        				m_TempVerts[3].uv1 = new Vector2(float.Parse((rInfo.mUV_X)), float.Parse(rInfo.mUV_Y + (32f/1024f)));
         				m_TempVerts[0].uv0 = new Vector2(rInfo.mFrame, 0);
         				m_TempVerts[1].uv0 = new Vector2(rInfo.mFrame, 0);
         				m_TempVerts[2].uv0 = new Vector2(rInfo.mFrame, 0);
@@ -134,7 +134,7 @@ public class EmojiText : Text {
 	{
 		if (mEmojiInfos==null)
 		{
-			string rConfigJson= File.ReadAllText(Application.dataPath+"/Resources/Emoji/EmojiConfig");
+			string rConfigJson= File.ReadAllText(Application.dataPath+"/Resources/Emoji/EmojiConfig.txt");
             mEmojiInfos=JsonMapper.ToObject<Dictionary<string, EmojiInfo>>(rConfigJson);
 		}
 	}
