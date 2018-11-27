@@ -17,7 +17,7 @@ public class EmojiBuildTool : Editor {
     private static void SaveConfig(Dictionary<string, EmojiInfo>rEmojiInfoDic)
     {
         string rConfigSavePath = Application.dataPath + "/Resources/Emoji/EmojiConfig.txt";
-        string rJson= JsonUtility.ToJson(rEmojiInfoDic);
+        string rJson= LitJson.JsonMapper.ToJson(rEmojiInfoDic);
         using (FileStream rFs = new FileStream(rConfigSavePath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
         {
             var rBytes = Encoding.UTF8.GetBytes(rJson);
@@ -34,6 +34,8 @@ public class EmojiBuildTool : Editor {
         {
             for (int i = 0; i < sprite.Value.Count; i++)
             {
+                rEmojiInfoDic[sprite.Key].mUV_X = ((float)rCurrentWidth / 1024f).ToString();
+                rEmojiInfoDic[sprite.Key].mUV_Y = ((float)rCurrentHeight / 1024f).ToString();
                 var rTex = sprite.Value[i];
                 for (int width = 0; width < rSpriteSize; width++)
                 {
@@ -49,6 +51,7 @@ public class EmojiBuildTool : Editor {
                 }
                 else
                     rCurrentWidth += rSpriteSize;
+               
             }
         }
         rAtlas.Apply();

@@ -193,3 +193,4 @@ C:\UnityProject\ExtensionUI\obj\Debug\Assembly-CSharp-Editor.csproj.CopyComplete
 C:\UnityProject\ExtensionUI\obj\Debug\Assembly-CSharp-Editor.dll
 C:\UnityProject\ExtensionUI\obj\Debug\Assembly-CSharp-Editor.pdb
 C:\UnityProject\ExtensionUI\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\UnityProject\ExtensionUI\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb

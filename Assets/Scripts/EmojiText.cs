@@ -5,6 +5,9 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text;
+using System;
+using LitJson;
+
 public class EmojiText : Text {
 	private Material mEmojiMaterial;
 	private string mReplaceString="方";
@@ -99,10 +102,10 @@ public class EmojiText : Text {
         				m_TempVerts[3].position *= unitsPerPixel;
 
         				//计算Emoji的UV，利用uv0传递帧数，uv1是emoji的纹理坐标
-        				m_TempVerts[0].uv1 = new Vector2(rInfo.mUV_X, rInfo.mUV_Y);
-        				m_TempVerts[1].uv1 = new Vector2(rInfo.mUV_X + 32, rInfo.mUV_Y);
-        				m_TempVerts[2].uv1 = new Vector2(rInfo.mUV_X + 32, rInfo.mUV_Y+ 32);
-        				m_TempVerts[3].uv1 = new Vector2(rInfo.mUV_X, rInfo.mUV_Y + 32);
+        				m_TempVerts[0].uv1 = new Vector2(float.Parse(rInfo.mUV_X), float.Parse(rInfo.mUV_Y));
+        				m_TempVerts[1].uv1 = new Vector2(float.Parse(rInfo.mUV_X + 32), float.Parse(rInfo.mUV_Y));
+        				m_TempVerts[2].uv1 = new Vector2(float.Parse(rInfo.mUV_X + 32), float.Parse(rInfo.mUV_Y+ 32));
+        				m_TempVerts[3].uv1 = new Vector2(float.Parse((rInfo.mUV_X)), float.Parse(rInfo.mUV_Y + 32));
         				m_TempVerts[0].uv0 = new Vector2(rInfo.mFrame, 0);
         				m_TempVerts[1].uv0 = new Vector2(rInfo.mFrame, 0);
         				m_TempVerts[2].uv0 = new Vector2(rInfo.mFrame, 0);
@@ -132,7 +135,7 @@ public class EmojiText : Text {
 		if (mEmojiInfos==null)
 		{
 			string rConfigJson= File.ReadAllText(Application.dataPath+"/Resources/Emoji/EmojiConfig");
-			mEmojiInfos=JsonUtility.FromJson<Dictionary<string,EmojiInfo>>(rConfigJson);
+            mEmojiInfos=JsonMapper.ToObject<Dictionary<string, EmojiInfo>>(rConfigJson);
 		}
 	}
 }
@@ -140,6 +143,7 @@ public class EmojiInfo
 {
     public string mKey;
     public int mFrame;
-    public float mUV_X;
-    public float mUV_Y;
+    public string mUV_X;
+    public string mUV_Y;
 }
+

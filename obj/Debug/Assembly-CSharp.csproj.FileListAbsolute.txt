@@ -161,3 +161,4 @@ C:\UnityProject\ExtensionUI\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.c
 C:\UnityProject\ExtensionUI\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\UnityProject\ExtensionUI\obj\Debug\Assembly-CSharp.dll
 C:\UnityProject\ExtensionUI\obj\Debug\Assembly-CSharp.pdb
+C:\UnityProject\ExtensionUI\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
