@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\EmojiText.cs" />
+     <Compile Include="Assets\Scripts\OutLineText.cs" />
      <None Include="Assets\Resources\Emoji\EmojiConfig.txt" />
      <None Include="Assets\Resources\Emoji\UI-EmojiFont.shader" />
  <Reference Include="Unity.PackageManagerUI.Editor">
